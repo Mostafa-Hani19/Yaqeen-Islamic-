@@ -40,7 +40,6 @@ html, body {
   position: fixed; inset-inline: 0; top: 0; z-index: 1000;
   background: rgba(13, 27, 42, 0.8); /* شفافية أعلى */
   backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
   box-shadow: 0 4px 30px var(--shadow);
   will-change: transform; /* تحسين أداء الهيدر الثابت */
 }
@@ -52,7 +51,7 @@ html, body {
   font-size: 18px;
   animation: pulse 2s ease-in-out infinite;
 }
-.brand-name { font-weight: 700; font-size: 22px; color: var(--text); text-shadow: 0 0 10px var(--glow); }
+.brand-name { font-weight: 700; font-size: 22px; color: var(--accent-light); text-shadow: 0 0 15px var(--glow); }
 .nav-links { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; }
 .nav-links a { 
   color: var(--text-muted); 
@@ -129,6 +128,7 @@ html, body {
   padding: 80px 0; 
   background: var(--primary);
   position: relative;
+  box-shadow: inset 0 8px 15px -10px var(--glow); /* إضافة إضاءة ذهبية علوية */
 }
 .section::before {
   content: '';
@@ -143,7 +143,7 @@ html, body {
   opacity: 0.1;
 }
 .section-alt { 
-  background: var(--secondary);
+  background: var(--primary); /* توحيد لون الخلفية */
   position: relative;
 }
 .section-alt::before {
@@ -252,10 +252,11 @@ html, body {
   padding: 20px;
 }
 .surah { 
-  background: linear-gradient(180deg, var(--secondary), var(--primary)); 
-  border: 1px solid var(--border); 
+  background: linear-gradient(180deg, var(--secondary), var(--primary));
+  border: 2px solid transparent;
+  border-image: linear-gradient(to bottom, var(--accent), transparent) 1;
   border-radius: 24px; 
-  padding: 32px; 
+  padding: 32px;
   box-shadow: 0 12px 40px var(--shadow); 
   position: relative; 
   overflow: hidden;
@@ -379,13 +380,14 @@ html, body {
 .adhkar-list { 
   display: grid; 
   gap: 16px; 
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* تحسين التجاوب */
 }
 .zekr { 
   background: linear-gradient(180deg, var(--secondary), var(--primary)); 
   border: 1px solid var(--border); 
   border-radius: 20px; 
   padding: 20px; 
+  cursor: pointer; /* إشارة إلى أن البطاقة قابلة للنقر */
   box-shadow: 0 8px 32px var(--shadow); 
   display: grid; 
   gap: 12px; 
@@ -501,10 +503,26 @@ html, body {
   margin-inline: auto;
 }
 
+/* فواصل زخرفية */
+.divider-top, .divider-bottom {
+  height: 60px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='%230d1b2a' fill-opacity='1' d='M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,58.7C672,53,768,43,864,42.7C960,43,1056,53,1152,58.7C1248,64,1344,64,1392,64L1440,64L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z'%3E%3C/path%3E%3C/svg%3E");
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  z-index: 10;
+}
+
+.divider-bottom {
+  transform: scaleY(-1);
+}
+
+
 /* قسم الآية المميزة */
 #verse-highlight {
   display: grid;
   place-items: center;
+  overflow-x: hidden; /* منع التمرير الأفقي */
   text-align: center;
 }
 .verse-highlight-content {
@@ -514,7 +532,7 @@ html, body {
 .verse-highlight-basmala {
   font-family: 'Noto Naskh Arabic', serif;
   color: var(--accent);
-  font-size: 38px;
+  font-size: clamp(28px, 6vw, 38px); /* حجم خط متجاوب */
   text-shadow: 0 0 15px var(--glow), 0 0 25px var(--glow);
   filter: drop-shadow(0 0 10px var(--glow));
   margin-bottom: 24px;
@@ -526,13 +544,13 @@ html, body {
 }
 .verse-highlight-quote p {
   font-family: 'Noto Naskh Arabic', serif;
-  font-size: 26px;
   color: var(--silver);
   text-shadow: 0 0 10px rgba(209, 213, 219, 0.3), 0 0 20px rgba(209, 213, 219, 0.2);
   filter: drop-shadow(0 0 8px rgba(209, 213, 219, 0.2));
   margin: 0;
-  line-height: 2;
-  max-width: 60ch;
+  line-height: 1.8;
+  word-break: break-word; /* ضمان عدم خروج النص عن الشاشة */
+  font-size: clamp(20px, 4vw, 26px);
 }
 .verse-highlight-quote cite {
   font-size: 14px;
@@ -543,15 +561,10 @@ html, body {
   font-style: normal;
   display: block;
 }
-.verse-highlight-quote p {
-  font-size: clamp(20px, 4vw, 26px);
-  line-height: 1.8;
-}
 
 .footer { 
-  background: var(--secondary); 
+  background: var(--primary); /* توحيد لون الخلفية */
   padding: 40px 0; 
-  border-top: 1px solid var(--border);
   position: relative;
 }
 .footer::before {
@@ -779,6 +792,15 @@ html, body {
     border-right: 1px solid var(--border);
     z-index: 1000; /* ضمان ظهور القائمة فوق كل العناصر */
   }
+  .nav-links::before { /* إضافة شعار "يقين" داخل القائمة المنسدلة */
+    content: 'يقين';
+    font-family: 'Noto Naskh Arabic', serif;
+    font-size: 32px;
+    color: var(--accent-light);
+    text-shadow: 0 0 15px var(--glow), 0 0 30px var(--glow);
+    position: absolute;
+    top: 15%;
+  }
   .nav-links.active {
     right: 0;
   }
@@ -801,11 +823,6 @@ html, body {
     padding: 60px 0;
   }
 
-  .adhkar-list { 
-    grid-template-columns: 1fr; 
-    gap: 12px;
-  }
-  
   .zekr {
     padding: 16px;
   }

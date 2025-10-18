@@ -144,7 +144,7 @@ function renderSurahVerses() {
 /**
  * عرض السورة
  */
-async function renderSurah(surahNumber) {
+async function renderSurah(surahNumber, options = { scroll: true }) {
   if (!elements.mushafContent) return;
   
   try {
@@ -174,6 +174,11 @@ async function renderSurah(surahNumber) {
     
     // عرض الآيات
     renderSurahVerses();
+
+    // تمرير الشاشة إلى بداية قسم المصحف لتحسين تجربة المستخدم
+    if (options.scroll && elements.mushafContent) {
+      elements.mushafContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); // يتم التمرير فقط إذا كان الخيار مفعلاً
+    }
     
   } catch (error) {
     elements.surahTitle.textContent = 'حدث خطأ';
@@ -290,11 +295,10 @@ function renderAdhkar(kind = 'morning') {
  * معالجة نقص عدد الذكر
  */
 function handleDhikrDecrement(event) {
-  // التأكد من أن العنصر الذي تم النقر عليه هو زر النقصان
-  const btn = event.target.closest('[data-dec]');
-  if (!btn) return; // إذا لم يكن زر النقصان، اخرج من الدالة
+  // التأكد من أن العنصر الذي تم النقر عليه هو بطاقة الذكر نفسها أو زر النقصان
+  const card = event.target.closest('.zekr');
+  if (!card) return; // إذا لم يكن ضمن بطاقة الذكر، اخرج من الدالة
 
-  const card = btn.closest('.zekr');
   const countSpan = card.querySelector('[data-count]');
   if (!card || !countSpan) return; // حماية إضافية
   const currentCount = Number(countSpan.textContent);
@@ -371,7 +375,7 @@ async function populateSurahs() {
     ).join('');
     
     // تحميل السورة الأولى (الفاتحة)
-    await renderSurah(1);
+    await renderSurah(1, { scroll: false });
     
   } catch (error) {
     elements.surahSelect.innerHTML = '<option>تعذر تحميل السور</option>';
@@ -384,7 +388,6 @@ async function populateSurahs() {
  */
 function initializeAdhkar() {
   renderAdhkar('morning');
-  console.log('تم تحميل الأذكار بنجاح');
 }
 
 // ========================================
@@ -511,6 +514,7 @@ function toggleNav() {
   
   elements.navToggle.setAttribute('aria-expanded', !isExpanded);
   navLinks.classList.toggle('active');
+  document.body.classList.toggle('nav-open'); // لإضافة overlay أو منع التمرير
   
   if (!isExpanded) {
     elements.navToggle.setAttribute('aria-label', 'إغلاق القائمة');
@@ -519,11 +523,40 @@ function toggleNav() {
   }
 }
 
+/**
+ * إدارة التركيز داخل القائمة المفتوحة (Focus Trap)
+ */
+function handleNavFocus(e) {
+  const navLinks = document.querySelector('.nav-links');
+  if (!navLinks.classList.contains('active')) return;
+
+  const focusableElements = navLinks.querySelectorAll('a[href]:not([disabled])');
+  const firstFocusableElement = focusableElements[0];
+  const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+  const isTabPressed = e.key === 'Tab';
+
+  if (!isTabPressed) {
+    return;
+  }
+
+  if (e.shiftKey) { // Shift + Tab
+    if (document.activeElement === firstFocusableElement) {
+      lastFocusableElement.focus();
+      e.preventDefault();
+    }
+  } else { // Tab
+    if (document.activeElement === lastFocusableElement) {
+      firstFocusableElement.focus();
+      e.preventDefault();
+    }
+  }
+}
+
 // ========================================
 // تهيئة التطبيق
 // ========================================
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('بدء تحميل موقع يقين...');
   
   // تهيئة القرآن
   populateSurahs();
@@ -531,7 +564,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // تهيئة الأذكار
   initializeAdhkar();
   
-  console.log('✓ تم تحميل الموقع بنجاح');
 
   const navLinksContainer = document.querySelector('.nav-links');
 
@@ -552,6 +584,16 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // إغلاق القائمة عند النقر خارجها
+  document.addEventListener('click', (e) => {
+    const navLinks = document.querySelector('.nav-links');
+    if (navLinks.classList.contains('active') && !navLinks.contains(e.target) && !elements.navToggle.contains(e.target)) {
+      toggleNav();
+    }
+  });
+
+  document.addEventListener('keydown', handleNavFocus);
 });
 
 // ========================================
@@ -564,7 +606,6 @@ document.addEventListener('DOMContentLoaded', () => {
 function clearCache() {
   if (cache.verses.size > 0) {
     cache.verses.clear();
-    console.log('تم تنظيف التخزين المؤقت');
   }
 }
 
