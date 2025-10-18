@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>يقين | نور القرآن</title>
+    <meta name="description" content="يقين - موقع روحاني يعرض سور القرآن الكريم وأذكار الصباح والمساء الكاملة (21 ذكر لكل منهما).">
+    <meta name="keywords" content="قرآن, أذكار, صباح, مساء, إسلام, يقين">
+    <meta name="author" content="MOSTAFA HANI">
+    <meta property="og:title" content="يقين | نور القرآن">
+    <meta property="og:description" content="موقع روحاني يعرض سور القرآن الكريم وأذكار الصباح والمساء">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#d4af37">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="container nav">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">✧</span>
+          <span class="brand-name">يقين</span>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#hero">الرئيسية</a></li>
+          <li><a href="#mushaf">المصحف</a></li>
+          <li><a href="#adhkar">الأذكار</a></li>
+          <li><a href="#about">تعريف</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="فتح القائمة" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </header>
+
+    <section id="hero" class="hero">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/poster.jpg"></video>
+      <div class="hero-overlay"></div>
+      <div class="hero-content container">
+        <h1 class="title">يقين</h1>
+        <p class="subtitle">سكينةٌ تُضيءُ القلب بنور القرآن</p>
+      </div>
+    </section>
+
+    <main>
+      <section id="mushaf" class="section container">
+        <div class="section-head">
+          <h2>المصحف </h2>
+          <p class="section-sub">اختر السورة لعرض الآيات كاملة</p>
+        </div>
+
+        <div class="mushaf-controls">
+          <label for="surahSelect">اختر السورة</label>
+          <select id="surahSelect" aria-label="اختر السورة"></select>
+        </div>
+
+        <div id="mushafContent" class="mushaf-content" aria-live="polite">
+          <div class="loading" id="mushafLoading" role="status" hidden>جاري التحميل...</div>
+          
+          <!-- أزرار التنقل بين الصفحات -->
+          <div class="page-navigation">
+            <button id="prevPageBtn" class="page-btn prev-btn" aria-label="الصفحة السابقة">
+              <span>←</span>
+            </button>
+            <div id="pageDisplay" class="page-display">صفحة 1 من 604</div>
+            <button id="nextPageBtn" class="page-btn next-btn" aria-label="الصفحة التالية">
+              <span>→</span>
+            </button>
+          </div>
+          
+          <article class="surah">
+            <header class="surah-head">
+              <h3 id="surahTitle">—</h3>
+              <div id="surahMeta" class="surah-meta"></div>
+            </header>
+            <div class="mushaf-content">
+              <p id="basmala" class="surah-basmala" hidden>﷽</p>
+              <p id="surahText" class="surah-text"></p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="adhkar" class="section section-alt">
+        <div class="container">
+          <div class="section-head">
+            <h2>أذكار الصباح والمساء</h2>
+            <p class="section-sub">ثمارٌ تُورِق بالقلب كل صباح ومساء </p>
+          </div>
+
+          <div class="tabs">
+            <button class="tab active" data-tab="morning">أذكار الصباح</button>
+            <button class="tab" data-tab="evening">أذكار المساء</button>
+            <button id="resetAdhkar" class="tab alt">إعادة العدّ</button>
+          </div>
+
+          <div id="adhkarList" class="adhkar-list"></div>
+        </div>
+      </section>
+
+      <section id="verse-highlight" class="section section-alt">
+        <div class="verse-highlight-content">
+          <div class="verse-highlight-basmala">﷽</div>
+          <blockquote class="verse-highlight-quote">
+            <p>الَّذِينَ آمَنُوا وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ اللَّهِ ۗ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ</p>
+            <cite>سورة الرعد - الآية 28</cite>
+          </blockquote>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <div class="about">
+          <div class="about-text">
+            <h2 class="about-title">عن يقين</h2>
+            <p>
+              نافذة تفيض نورًا وسلامًا، تُقرّبك من كتاب الله بتصميم أنيق وتجربة استخدام مريحة.
+            </p>
+            <p>
+              هنا تجد السور مرتبة، والأذكار حاضرة، في رحلة تجمع بين الجمال والطمأنينة.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div class="foot-brand">
+          <span class="brand-name">يقين</span>
+          <p>نورٌ وطمأنينة</p>
+        </div>
+        <ul class="foot-links">
+          <li><a href="#mushaf">المصحف</a></li>
+          <li><a href="#adhkar">الأذكار</a></li>
+          <li><a href="#about">تعريف</a></li>
+        </ul>
+        <div class="foot-copy">
+          <div>© <span id="year"></span> يقين</div>
+          <div class="designer-credit">تم تصميم الموقع بواسطة Mostafa Hani</div>
+        </div>
+      </div>
+    </footer>
+
+    <button id="scrollToTopBtn" class="scroll-to-top" title="الانتقال للأعلى" aria-label="الانتقال للأعلى">↑</button>
+
+    <script src="script.js"></script>
+  </body>
+  </html>
