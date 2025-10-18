@@ -25,7 +25,7 @@ html, body {
   padding: 0; margin: 0;
   background: var(--primary);
   color: var(--text);
-  font-family: 'Tajawal', 'Noto Naskh Arabic', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family: 'Almarai', 'Amiri', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   scroll-behavior: smooth;
   min-height: 100vh;
 }
@@ -51,7 +51,11 @@ html, body {
   font-size: 18px;
   animation: pulse 2s ease-in-out infinite;
 }
-.brand-name { font-weight: 700; font-size: 22px; color: var(--accent-light); text-shadow: 0 0 15px var(--glow); }
+.brand-name { 
+  font-weight: 700; font-size: 22px; color: var(--accent-light); 
+  text-shadow: 0 0 15px var(--glow);
+  animation: glow-pulse 4s ease-in-out infinite; /* إضافة توهج متلألئ */
+}
 .nav-links { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; }
 .nav-links a { 
   color: var(--text-muted); 
@@ -97,13 +101,13 @@ html, body {
 .hero-overlay { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, transparent, var(--primary) 85%); pointer-events: none; }
 .hero-content { position: relative; padding-top: 70px; padding-bottom: 40px; animation: rise 1.2s ease-out both; }
 .title {
-  font-family: 'Noto Naskh Arabic', serif;
+  font-family: 'Amiri', serif;
   font-size: clamp(48px, 7vw, 90px);
   color: var(--accent-light);
   text-shadow: 0 0 15px var(--glow), 0 0 30px var(--glow);
-  filter: drop-shadow(0 0 10px var(--glow));
   letter-spacing: 2px;
   margin-bottom: 0;
+  animation: glow-pulse 4s ease-in-out infinite; /* إضافة توهج متلألئ */
 }
 .subtitle {
   color: var(--text-muted); font-size: clamp(18px, 2.5vw, 24px); margin: 0 0 22px; text-shadow: 0 2px 10px var(--shadow);
@@ -121,6 +125,11 @@ html, body {
     opacity: 1; 
     transform: translateY(0) scale(1);
   } 
+}
+
+@keyframes glow-pulse {
+  0%, 100% { text-shadow: 0 0 15px var(--glow), 0 0 30px var(--glow); }
+  50% { text-shadow: 0 0 25px var(--glow), 0 0 50px var(--glow); }
 }
 
 /* Sections */
@@ -161,8 +170,9 @@ html, body {
 .section-head h2 { 
   margin: 0 0 12px; 
   font-size: 32px; 
+  font-family: 'Amiri', serif;
   color: var(--accent-light);
-  text-shadow: 0 2px 8px var(--shadow);
+  text-shadow: 0 0 15px var(--glow); /* توحيد تأثير التوهج */
   position: relative;
 }
 .section-head h2::after {
@@ -296,9 +306,9 @@ html, body {
 }
 .surah-head h3 { 
   margin: 0; 
-  color: var(--accent-light); 
+  color: var(--accent-light);
   font-size: 28px;
-  text-shadow: 0 2px 8px var(--shadow);
+  text-shadow: 0 0 12px var(--glow); /* توحيد تأثير التوهج */
 }
 .surah-meta { 
   color: var(--text-dim); 
@@ -311,8 +321,8 @@ html, body {
 /* تم حذف CSS التبويبات */
 .surah-basmala:not([hidden]) { 
   display: block;
-  text-align: center; 
-  font-family: 'Noto Naskh Arabic', serif; 
+  text-align: center;
+  font-family: 'Amiri', serif;
   color: var(--accent); 
   font-size: 1.5em; 
   margin-bottom: 20px; 
@@ -322,7 +332,7 @@ html, body {
 }
 /* تحسينات إضافية للواجهة */
 .surah-text { 
-  font-family: 'Noto Naskh Arabic', serif; 
+  font-family: 'Amiri', serif;
   white-space: pre-wrap; 
   line-height: 2.8; 
   font-size: clamp(20px, 2.5vw, 28px); 
@@ -490,9 +500,11 @@ html, body {
 }
 
 .about-title {
+  font-family: 'Amiri', serif;
   font-size: 28px;
   color: var(--accent-light);
   margin-bottom: 16px;
+  text-shadow: 0 0 12px var(--glow); /* توحيد تأثير التوهج */
   margin-top: 0;
 }
 .about-text p {
@@ -530,7 +542,7 @@ html, body {
   z-index: 1;
 }
 .verse-highlight-basmala {
-  font-family: 'Noto Naskh Arabic', serif;
+  font-family: 'Amiri', serif;
   color: var(--accent);
   font-size: clamp(28px, 6vw, 38px); /* حجم خط متجاوب */
   text-shadow: 0 0 15px var(--glow), 0 0 25px var(--glow);
@@ -543,7 +555,7 @@ html, body {
   padding: 0;
 }
 .verse-highlight-quote p {
-  font-family: 'Noto Naskh Arabic', serif;
+  font-family: 'Amiri', serif;
   color: var(--silver);
   text-shadow: 0 0 10px rgba(209, 213, 219, 0.3), 0 0 20px rgba(209, 213, 219, 0.2);
   filter: drop-shadow(0 0 8px rgba(209, 213, 219, 0.2));
@@ -564,7 +576,8 @@ html, body {
 
 .footer { 
   background: var(--primary); /* توحيد لون الخلفية */
-  padding: 40px 0; 
+  padding-top: 40px;
+  padding-bottom: 20px;
   position: relative;
 }
 .footer::before {
@@ -580,11 +593,12 @@ html, body {
 }
 .footer-grid { 
   display: grid; 
-  grid-template-columns: 1fr auto 1fr; 
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 24px; 
-  align-items: center;
+  align-items: start;
   position: relative;
   z-index: 1;
+  text-align: center;
 }
 .foot-brand .brand-name { 
   font-weight: 700; 
@@ -603,6 +617,7 @@ html, body {
   list-style: none; 
   margin: 0; 
   padding: 0; 
+  justify-content: center;
 }
 .foot-links a { 
   color: var(--text-muted); 
@@ -615,18 +630,42 @@ html, body {
   color: var(--accent);
   background: rgba(212,175,55,0.1);
 }
-.foot-copy { 
-  color: var(--text-dim); 
-  text-align: right;
+.footer-bottom {
+  grid-column: 1 / -1;
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  align-items: center;
+  gap: 16px;
 }
-.designer-credit {
-  font-size: 12px;
+.foot-copy {
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
+/* روابط التواصل الاجتماعي */
+.social-links {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+.social-links a {
   color: var(--text-muted);
-  font-weight: 600;
-  opacity: 0.8;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  transition: all .3s ease;
+}
+.social-links a:hover {
+  color: var(--accent-light);
+  background: var(--glow);
+  border-color: var(--accent);
+  transform: translateY(-2px);
 }
 
 /* Responsive Design */
@@ -794,7 +833,7 @@ html, body {
   }
   .nav-links::before { /* إضافة شعار "يقين" داخل القائمة المنسدلة */
     content: 'يقين';
-    font-family: 'Noto Naskh Arabic', serif;
+    font-family: 'Amiri', serif;
     font-size: 32px;
     color: var(--accent-light);
     text-shadow: 0 0 15px var(--glow), 0 0 30px var(--glow);
@@ -853,7 +892,6 @@ html, body {
     text-align: center;
     gap: 32px;
   }
-  .foot-copy { text-align: center; }
 }
 
 @media (max-width: 480px) {
