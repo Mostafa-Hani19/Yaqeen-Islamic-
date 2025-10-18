@@ -39,7 +39,7 @@
 
 | الصفحة الرئيسية | صفحة الأذكار | المصحف والتفسير |
 |-----------------|---------------|----------------|
-| <img src="./assets/screen2.png" width="250"> | <img src="./assets/screen3.png" width="250"> | <img src="./assets/screen4.png" width="250"> |
+| <img src="./assets/screen4.png" width="250"> | <img src="./assets/screen3.png" width="250"> | <img src="./assets/screen2.png" width="250"> |
 
 ---
 
