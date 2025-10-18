@@ -29,24 +29,6 @@ const API_CONFIG = {
 };
 
 // ========================================
-// بيانات صفحات المصحف الحقيقي
-// ========================================
-const MUSHAF_PAGES = {
-  // بيانات صفحات المصحف الحقيقي (مثال للصفحات الأولى)
-  1: { surah: 1, startAyah: 1, endAyah: 7 }, // الفاتحة
-  2: { surah: 2, startAyah: 1, endAyah: 5 }, // البقرة بداية
-  3: { surah: 2, startAyah: 6, endAyah: 16 },
-  4: { surah: 2, startAyah: 17, endAyah: 24 },
-  5: { surah: 2, startAyah: 25, endAyah: 29 },
-  6: { surah: 2, startAyah: 30, endAyah: 37 },
-  7: { surah: 2, startAyah: 38, endAyah: 49 },
-  8: { surah: 2, startAyah: 50, endAyah: 61 },
-  9: { surah: 2, startAyah: 62, endAyah: 70 },
-  10: { surah: 2, startAyah: 71, endAyah: 82 },
-  // يمكن إضافة باقي الصفحات حسب الحاجة
-};
-
-// ========================================
 // نظام التخزين المؤقت (Caching)
 // ========================================
 const cache = {
@@ -59,8 +41,6 @@ const cache = {
 // ========================================
 let currentChapter = 1;
 let currentVerses = [];
-let currentPage = 1;
-let totalPages = 604; // عدد صفحات المصحف الحقيقي
 
 // ========================================
 // دوال جلب البيانات
@@ -146,33 +126,6 @@ async function fetchSurahText(chapterId) {
 // ========================================
 
 /**
- * عرض آيات الصفحة الحالية
- */
-function renderPageVerses() {
-  if (!currentVerses.length) return;
-  
-  const pageData = MUSHAF_PAGES[currentPage];
-  if (!pageData) {
-    // إذا لم تكن الصفحة موجودة في البيانات، اعرض السورة كاملة
-    renderSurahVerses();
-    return;
-  }
-  
-  // عرض الآيات المحددة للصفحة
-  const startIndex = pageData.startAyah - 1;
-  const endIndex = pageData.endAyah;
-  const pageVerses = currentVerses.slice(startIndex, endIndex);
-  
-  const html = pageVerses.map((verse, index) => {
-    const ayahNumber = verse.number || (startIndex + index + 1);
-    return `<span class="ayah-text">${verse.text_uthmani}</span><span class="ayah-num">${ayahNumber}</span>`;
-  }).join(' ');
-  
-  elements.surahText.innerHTML = html;
-  elements.surahText.hidden = false;
-}
-
-/**
  * عرض جميع آيات السورة
  */
 function renderSurahVerses() {
@@ -219,11 +172,8 @@ async function renderSurah(surahNumber) {
     // إظهار/إخفاء البسملة
     toggleBasmala(surahNumber);
     
-    // عرض الآيات حسب الصفحة الحالية
-    renderPageVerses();
-    
-    // تحديث عرض رقم الصفحة
-    updatePageDisplay();
+    // عرض الآيات
+    renderSurahVerses();
     
   } catch (error) {
     elements.surahTitle.textContent = 'حدث خطأ';
@@ -246,38 +196,6 @@ function toggleBasmala(chapterNumber) {
 
   // إظهار البسملة لجميع السور ما عدا سورة التوبة (رقم 9)
   basmalaEl.hidden = (chapter === 9);
-}
-
-/**
- * الانتقال للصفحة التالية
- */
-function nextPage() {
-  if (currentPage < totalPages) {
-    currentPage++;
-    updatePageDisplay();
-    renderPageVerses();
-  }
-}
-
-/**
- * الانتقال للصفحة السابقة
- */
-function prevPage() {
-  if (currentPage > 1) {
-    currentPage--;
-    updatePageDisplay();
-    renderPageVerses();
-  }
-}
-
-/**
- * تحديث عرض رقم الصفحة
- */
-function updatePageDisplay() {
-  const pageDisplay = document.getElementById('pageDisplay');
-  if (pageDisplay) {
-    pageDisplay.textContent = `صفحة ${currentPage} من ${totalPages}`;
-  }
 }
 
 // ========================================
@@ -519,18 +437,6 @@ if (elements.resetAdhkarBtn) {
     const tabType = activeTab ? activeTab.dataset.tab : 'morning';
     renderAdhkar(tabType);
   });
-}
-
-// أزرار التنقل بين الصفحات
-const nextPageBtn = document.getElementById('nextPageBtn');
-const prevPageBtn = document.getElementById('prevPageBtn');
-
-if (nextPageBtn) {
-  nextPageBtn.addEventListener('click', nextPage);
-}
-
-if (prevPageBtn) {
-  prevPageBtn.addEventListener('click', prevPage);
 }
 
 // ========================================
