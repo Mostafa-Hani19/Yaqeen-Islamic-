@@ -5,7 +5,7 @@
 </p>
 
 > 🌐 **تقدر تزور الموقع مباشرة من هنا:**  
-👉 [🔗 موقع يقين الرسمي على Netlify](https://yaqeeen.netlify.app/)
+� [🔗 موقع يقين الرسمي على Netlify](https://yaqeeen.netlify.app/)
 
 
 
