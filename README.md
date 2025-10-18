@@ -1,7 +1,7 @@
 # 🌙 Yaqeen - موقع يقين الإسلامي
 
 <p align="center">
-  <img src="./assets/screen1.png" alt="Yaqeen Banner" width="800">
+  <img src="./assets/screen1 .png" alt="Yaqeen Banner" width="800">
 </p>
 
 ## 🕌 مقدمة
@@ -37,7 +37,7 @@
 
 ## 🖼️ صور من الموقع
 
-| الصفحة الرئيسية | صفحة الأذكار | المصحف والتفسير |
+| الصفحة التعريفية | صفحة الأذكار | المصحف  |
 |-----------------|---------------|----------------|
 | <img src="./assets/screen4.png" width="250"> | <img src="./assets/screen3.png" width="250"> | <img src="./assets/screen2.png" width="250"> |
 
