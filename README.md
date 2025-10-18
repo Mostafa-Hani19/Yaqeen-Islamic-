@@ -1,6 +1,6 @@
 # 🌙 Yaqeen - موقع يقين الإسلامي
 
-![Yaqeen Banner](assets/screen 1.png)
+![Yaqeen Banner](assets/screen1.png)
 
 ## 🕌 مقدمة
 **يقين** هو موقع إسلامي حديث يجمع بين البساطة والروحانية ✨  
@@ -35,7 +35,7 @@
 
 | الصفحة الرئيسية | صفحة الأذكار | المصحف والتفسير |
 |-----------------|---------------|----------------|
-| ![Home](assets/screen 1.png) | ![Adhkar](assets/screen 2.png) | ![Quran](assets/screen 3.png) |
+| ![Home](assets/screen2.png) | ![Adhkar](assets/screen3.png) | ![Quran](assets/screen4.png) |
 
 ---
 
